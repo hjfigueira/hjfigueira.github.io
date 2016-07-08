@@ -1,10 +1,8 @@
 
-    Processor = function(name){
+    Processor = function(name,frequency){
 
-
-
-
-
+        this.name = name;
+        this.frequency = frequency;
     };
 
     Processor.prototype.onPowerCheck = function()

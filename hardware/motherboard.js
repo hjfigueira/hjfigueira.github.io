@@ -1,7 +1,6 @@
 
     MotherBoard = function()
     {
-
         this.slots = {
             'cpu' : null,
             'vga': null,
@@ -35,16 +34,16 @@
     MotherBoard.prototype.onPowerUp = function()
     {
         this.withComponent('vga',function(vga){
-            vga.pushLine('MotherBoard Power ON');
-            vga.pushLine('......................');
+            vga.write('MotherBoard Power ON¬');
+            vga.write('......................¬');
         });
 
         this.startComponents();
 
         this.withComponent('vga',function(vga){
-            vga.pushLine('......................');
-            vga.pushLine('Starting BOOT Coroutine');
-            vga.pushLine('......................');
+            vga.write('......................¬');
+            vga.write('Starting BOOT Coroutine¬');
+            vga.write('......................¬');
         });
     };
 
@@ -80,18 +79,19 @@
         this.forEachComponent(function(type, component){
 
             self.withComponent('vga',function(vga){
-                vga.pushLine(component.onPowerCheck());
+                vga.write(component.onPowerCheck()+'¬');
             });
 
             self.withComponent('vga',function(vga){
-                vga.pushLine(component.onPowerUp());
+                vga.write(component.onPowerUp()+'¬');
             });
 
         });
 
         self.withComponent('vga',function(vga){
-            vga.pushLine("All Devices Powered UP and RUNNING");
+            vga.write("All Devices Powered UP and RUNNING¬");
         });
+
     };
 
     MotherBoard.prototype.withComponent = function(slot,ifConnected)

@@ -1,8 +1,6 @@
 
     Monitor = function()
     {
-        this.element = null;
-
         this.ySize = 40;
         this.xSize = 20;
 
@@ -11,7 +9,6 @@
 
         this.buffer = [];
         this.queue = [];
-        this.move = false;
     };
 
     Monitor.prototype.print = function()
@@ -23,10 +20,7 @@
 
             if(self.buffer.length == 0)
             {
-                self.moveScreen();
-                self.move = false;
-
-                self.bufferToScreen();
+                self.queueToBuffer();
 
                 if(self.queue.length == 0)
                 {
@@ -34,7 +28,7 @@
                 }
             }
 
-            self.setPixelFromBuffer();
+            self.printPixelFromBuffer();
 
         }, refreshPerChar);
     };
@@ -44,13 +38,24 @@
         $('#main-canvas div').remove();
     };
 
-    Monitor.prototype.setPixelFromBuffer = function()
+    Monitor.prototype.printPixelFromBuffer = function()
     {
         if(typeof this.buffer[0] != 'undefined')
         {
             cBuffer = this.buffer[0];
             this.buffer.shift();
-            this.setPixel(cBuffer.c,cBuffer.x,cBuffer.y);
+
+            console.log(cBuffer.c);
+
+            if(cBuffer.c == '¬')
+            {
+                console.log('Scrool');
+                this.moveScreen();
+            }
+            else
+            {
+                this.setPixel(cBuffer.c,cBuffer.x,cBuffer.y);
+            }
         }
     };
 
@@ -80,18 +85,6 @@
         pixel.css('top',positionXTo+'%');
         pixel.attr('data-x',xto);
         pixel.attr('data-y',yto);
-    };
-
-    Monitor.prototype.create = function(elementSelector)
-    {
-
-        this.element = $(elementSelector);
-
-        resX = this.data('res-x');
-        resY = this.data('res-y');
-
-        this.pixelXRate = 100/this.xSize;
-        this.pixelYRate = 100/this.ySize;
     };
 
     Monitor.prototype.onPowerCheck = function()
@@ -139,7 +132,7 @@
         }
     };
 
-    Monitor.prototype.bufferToScreen = function()
+    Monitor.prototype.queueToBuffer = function()
     {
         var self = this;
         queue = this.queue[0];
@@ -161,21 +154,13 @@
     {
         var self = this;
 
+        if(!x){x = 20};
+        if(!y){y = 1};
+
+
         if(typeof string != 'undefined')
         {
             self.queue.push({ x : x, y : y, string :string});
             this.print();
         }
-    };
-
-    Monitor.prototype.scroolScreen = function()
-    {
-        this.move = true;
-    };
-
-    Monitor.prototype.pushLine = function(string)
-    {
-        var self = this;
-        self.write(string,20,1)
-        self.scroolScreen();
     };
