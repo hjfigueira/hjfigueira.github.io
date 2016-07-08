@@ -44,6 +44,10 @@
             vga.write('......................¬');
             vga.write('Starting BOOT Coroutine¬');
             vga.write('......................¬');
+            vga.write('......................¬');
+            vga.write('......................¬');
+
+            vga.write('ERROR - No Bootable Device Found');
         });
     };
 
