@@ -1,7 +1,7 @@
 
-    KeyBoard = function(){
+    KeyBoard = function(name){
 
-
+        this.name = name;
 
 
 
@@ -18,6 +18,16 @@
     };
 
     KeyBoard.prototype.onPowerOff = function()
+    {
+
+    };
+
+    KeyBoard.prototype.onDetails = function()
+    {
+        return this.name;
+    };
+
+    KeyBoard.prototype.onClock = function()
     {
 
     };

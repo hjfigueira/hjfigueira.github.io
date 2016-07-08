@@ -1,9 +1,8 @@
 
-    HardDrive = function(){
+    HardDrive = function(name, size){
 
-
-
-
+        this.name = name;
+        this.size = size;
 
     };
 
@@ -18,6 +17,28 @@
     };
 
     HardDrive.prototype.onPowerOff = function()
+    {
+
+    };
+
+    HardDrive.prototype.onDetails = function()
+    {
+        return this.name+' : '+this.size+' MB';
+    };
+
+    HardDrive.prototype.boot = function()
+    {
+
+    };
+
+    HardDrive.prototype.onClock = function()
+    {
+
+
+
+    };
+
+    HardDrive.prototype.displayLoad = function()
     {
 
     };

@@ -1,36 +1,36 @@
 
-    Monitor = function()
+    Monitor = function(name,x,y)
     {
-        this.ySize = 40;
-        this.xSize = 20;
+        this.name       = name;
+        this.ySize      = y;
+        this.xSize      = x;
 
         this.pixelXRate = 5;
         this.pixelYRate = 2.5;
 
-        this.buffer = [];
-        this.queue = [];
+        this.buffer     = [];
+        this.queue      = [];
+        this.clocking   = true;
+    };
+
+    Monitor.prototype.onClock = function()
+    {
+        if(this.buffer.length == 0)
+        {
+            this.queueToBuffer();
+
+            if(this.queue.length == 0)
+            {
+                this.clocking = false;
+            }
+        }
+
+        this.printPixelFromBuffer();
     };
 
     Monitor.prototype.print = function()
     {
-        var self = this;
-        var refreshPerChar = 100;
-
-        var updateInterval = setInterval(function(){
-
-            if(self.buffer.length == 0)
-            {
-                self.queueToBuffer();
-
-                if(self.queue.length == 0)
-                {
-                    clearInterval(updateInterval);
-                }
-            }
-
-            self.printPixelFromBuffer();
-
-        }, refreshPerChar);
+        this.clocking = true;
     };
 
     Monitor.prototype.clear  = function()
@@ -45,11 +45,8 @@
             cBuffer = this.buffer[0];
             this.buffer.shift();
 
-            console.log(cBuffer.c);
-
             if(cBuffer.c == '¬')
             {
-                console.log('Scrool');
                 this.moveScreen();
             }
             else
@@ -94,15 +91,6 @@
 
     Monitor.prototype.onPowerUp = function()
     {
-        setInterval(function(){
-
-            seed = (Math.random()*10).toPrecision(1);
-
-            $('#main-canvas').removeClass();
-            $('#main-canvas').addClass('textshadow-'+seed);
-
-        },100);
-
         return 'Monitor Already ON';
     };
 
@@ -163,4 +151,9 @@
             self.queue.push({ x : x, y : y, string :string});
             this.print();
         }
+    };
+
+    Monitor.prototype.onDetails = function()
+    {
+        return this.name+' - '+this.xSize+'x'+this.ySize;
     };
