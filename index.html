@@ -1,27 +1,24 @@
-<?php
-
-$yResolution = 40;
-$xResolution = 20;
-
-$xRation = number_format(100/$xResolution,2);
-$yRation = number_format(100/$yResolution,2);
-?>
-
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-        <script type="text/javascript" src="monitor.js"></script>
-        <script type="text/javascript" src="stdout.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="terminal.css">
+        <script src="hardware/motherboard.js"></script>
+        <script src="hardware/keyboard.js"></script>
+        <script src="hardware/monitor.js"></script>
+        <script src="hardware/hardrive.js"></script>
+        <script src="hardware/processor.js"></script>
+
+        <script src="fullComputer.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="assets/css/terminal.css">
 
         <style>
             #main-canvas div{
                 text-align: center;
                 position: absolute;
                 font-size: 200%;
-                height: <?= $xRation ?>%;
-                width: <?= $yRation ?>%;
+                height: 2.5%;
+                width: 5%;
                 color: #00ff00;
                 text-shadow: #00ff00 0px 0px 9px;
             }
@@ -31,7 +28,7 @@ $yRation = number_format(100/$yResolution,2);
 
         <div id="computer">
 
-            <div id="monitor" data-res-y="60" data-res-x="30" ></div>
+            <div id="main-canvas" data-res-y="40" data-res-x="20" ></div>
 
         </div>
 
