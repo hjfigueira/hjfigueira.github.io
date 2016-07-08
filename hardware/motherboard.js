@@ -76,6 +76,10 @@
     {
         var self =  this;
 
+        self.withComponent('vga',function(vga){
+            vga.write("Beginning Hardware Check¬");
+        });
+
         this.forEachComponent(function(type, component){
 
             self.withComponent('vga',function(vga){

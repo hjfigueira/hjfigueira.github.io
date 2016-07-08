@@ -7,7 +7,7 @@
 
     Processor.prototype.onPowerCheck = function()
     {
-        return 'CPU Power Check ............ OK';
+        return 'CPU Power Check ................ OK';
     };
 
     Processor.prototype.onPowerUp = function()

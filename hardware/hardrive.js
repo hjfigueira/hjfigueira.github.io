@@ -9,7 +9,7 @@
 
     HardDrive.prototype.onPowerCheck = function()
     {
-        return 'HardDrive Power Check ............ OK';
+        return 'HardDrive Power Check .......... OK';
     };
 
     HardDrive.prototype.onPowerUp = function()
