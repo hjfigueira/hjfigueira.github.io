@@ -33,53 +33,24 @@
 
     MotherBoard.prototype.onPowerUp = function()
     {
-        this.withComponent('vga',function(vga){
+        this.withComponent(['vga'],function(vga){
             vga.write('MotherBoard Power ON¬');
-            vga.write('......................¬');
+            vga.write('--------------------------------------------------¬');
         });
 
         this.hardwareSpecs();
 
         this.startComponents();
 
-        this.withComponent('vga',function(vga){
+        this.withComponent(['vga','cpu','sata'],function(vga,cpu,sata){
             vga.write('¬');
             vga.write('Starting BOOT Coroutine¬');
-            vga.write('......................¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
+            vga.write('--------------------------------------------------¬');
+            cpu.sleep(2000);
             vga.clear();
-            vga.write('               _  ___  ____     ¬');
-            vga.write('   __ _ _   _ (_)/ _ \\\/ ___|  ¬');
-            vga.write('  / _` | | | || | | | \\__ _\\  ¬');
-            vga.write(' | (_| | |_| || | |_| |___)|   ¬');
-            vga.write('  \\__, |\\__,_|/ |\\___/|____/ ¬');
-            vga.write('  |___/     |__/                ¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('         Welcome to¬');
-            vga.write('   General Use Javascript OS¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('¬');
-            vga.write('Fatal ERROR - Libs and Drivers could¬');
-            vga.write('              not be loaded at boot¬');
-            vga.write('¬');
-            vga.write('¬');
-
+            sata.boot();
         });
 
-        this.withComponent('sata',function(hd){
-            hd.boot();
-        });
     };
 
     MotherBoard.prototype.onPowerOff = function()
@@ -107,36 +78,37 @@
     {
         var self =  this;
 
-        self.withComponent('vga',function(vga){
+        self.withComponent(['vga'],function(vga){
             vga.write("¬");
             vga.write("Beginning Hardware Check¬");
-            vga.write("......................¬");
+            vga.write('--------------------------------------------------¬');
         });
 
         this.forEachComponent(function(type, component){
 
-            self.withComponent('vga',function(vga){
+            self.withComponent(['vga', 'cpu'],function(vga,cpu){
                 vga.write(component.onPowerCheck()+'¬');
-            });
-
-            self.withComponent('vga',function(vga){
                 vga.write(component.onPowerUp(self)+'¬');
             });
 
         });
 
-        self.withComponent('vga',function(vga){
+        self.withComponent(['vga'],function(vga){
             vga.write("All Devices Powered UP and RUNNING¬");
         });
 
     };
 
-    MotherBoard.prototype.withComponent = function(slot,ifConnected)
+    MotherBoard.prototype.withComponent = function(slotArray,ifConnected)
     {
-        if(this.slots[slot] != null)
-        {
-            ifConnected(this.slots[slot]);
-        }
+        var self = this;
+        components = [];
+
+        slotArray.forEach(function(item){
+            components.push(self.slots[item]);
+        });
+
+        ifConnected.apply(self,components);
     };
 
     MotherBoard.prototype.hardwareSpecs = function()
@@ -144,9 +116,8 @@
         self = this;
 
         this.forEachComponent(function(type,component){
-            self.withComponent('vga',function(vga){
+            self.withComponent(['vga'],function(vga){
                 vga.write( type +' : '+component.onDetails()+'¬');
             });
-
         })
     };

@@ -1,16 +1,16 @@
 
-    Monitor = function(name,x,y)
+    Monitor = function(name,y,x)
     {
         this.name       = name;
         this.ySize      = y;
         this.xSize      = x;
 
-        this.pixelXRate = 5;
-        this.pixelYRate = 2.5;
+        this.pixelXRate = 100/this.xSize;
+        this.pixelYRate = 100/this.ySize;
 
-        this.buffer     = [];
-        this.queue      = [];
-        this.clocking   = true;
+        //this.buffer     = [];
+        //this.queue      = [];
+        //this.clocking   = true;
     };
 
     Monitor.prototype.onClock = function()
@@ -28,14 +28,19 @@
         this.printPixelFromBuffer();
     };
 
-    Monitor.prototype.print = function()
-    {
-        this.clocking = true;
-    };
+    //Monitor.prototype.print = function()
+    //{
+    //    this.clocking = true;
+    //};
 
     Monitor.prototype.clear  = function()
     {
-        $('#main-canvas div').remove();
+        this.motherBoard.withComponent(['cpu'], function(cpu){
+
+            cpu.execute(function(){$('#main-canvas div').remove()});
+
+        });
+
     };
 
     Monitor.prototype.printPixelFromBuffer = function()
@@ -51,24 +56,35 @@
             }
             else
             {
+                if(cBuffer.x >= this.xSize || cBuffer.y >= this.ySize)
+                {
+                    return false;
+                }
+
+                if(cBuffer.x < 0 || cBuffer.y < 0 )
+                {
+                    return false;
+                }
+
                 this.setPixel(cBuffer.c,cBuffer.x,cBuffer.y);
+
             }
         }
     };
 
     Monitor.prototype.setPixel = function(char,x,y)
     {
-        absoluteX = this.pixelXRate*x;
-        absoluteY = this.pixelYRate*y;
+        absoluteX = this.pixelXRate * x;
+        absoluteY = this.pixelYRate * y;
 
-        if(char != '')
-        {
-            $('[data-x="'+x+'"][data-y="'+y+'"]').remove();
+        if (char != '') {
+            $('[data-x="' + x + '"][data-y="' + y + '"]').remove();
 
-            var newChar = '<div data-x="'+x+'" data-y="'+y+'" style="left : '+absoluteY+'%; top : '+absoluteX+'%;">'+char+'</div>';
+            var newChar = '<div data-x="' + x + '" data-y="' + y + '" style="left : ' + absoluteY + '%; top : ' + absoluteX + '%;">' + char + '</div>';
             $('#main-canvas').append(newChar);
 
         }
+
     };
 
     Monitor.prototype.movePixel = function(x,y,xto,yto)
@@ -86,7 +102,7 @@
 
     Monitor.prototype.onPowerCheck = function()
     {
-        return 'Monitor Power Check ............ OK';
+        return 'Monitor Power Check .......................... OK';
     };
 
     Monitor.prototype.onPowerUp = function()
@@ -101,7 +117,7 @@
 
     Monitor.prototype.moveScreen = function()
     {
-        for (xc = 0; xc <= 20; xc++) {
+        for (xc = 0; xc <= this.xSize; xc++) {
 
             pixel = $('[data-x="'+xc+'"]');
 
@@ -138,19 +154,59 @@
         }
     };
 
+    //Monitor.prototype.write = function(string, x, y)
+    //{
+    //    var self = this;
+    //
+    //    if(!x){x = this.xSize-1};
+    //    if(!y){y = 1};
+    //
+    //    if(typeof string != 'undefined')
+    //    {
+    //        self.queue.push({ x : x, y : y, string :string});
+    //        self.print();
+    //    }
+    //};
+
     Monitor.prototype.write = function(string, x, y)
     {
         var self = this;
+        this.motherBoard.withComponent(['cpu'], function(cpu){
 
-        if(!x){x = 20};
-        if(!y){y = 1};
+                if(!x){x = self.xSize-1};
+                if(!y){y = 1};
 
+                arrayChar = string.split('');
+                arrayChar.forEach(function(item,index){
 
-        if(typeof string != 'undefined')
-        {
-            self.queue.push({ x : x, y : y, string :string});
-            this.print();
-        }
+                cpu.execute(function(){
+
+                    if(item == '¬')
+                    {
+                        self.moveScreen();
+                    }
+                    else
+                    {
+                        if(x >= self.xSize || y >= self.ySize)
+                        {
+                            return false;
+                        }
+
+                        if(x < 0 || y < 0 )
+                        {
+                            return false;
+                        }
+
+                        self.setPixel(item,x,y+index);
+
+                    }
+
+                });
+
+            });
+
+        });
+
     };
 
     Monitor.prototype.onDetails = function()

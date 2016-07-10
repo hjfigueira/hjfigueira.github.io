@@ -13,7 +13,7 @@
 
     Speaker.prototype.onPowerCheck = function()
     {
-        return 'Speaker Power Check ............ OK';
+        return 'Speaker Power Check .......................... OK';
     };
 
     Speaker.prototype.onPowerUp = function()
