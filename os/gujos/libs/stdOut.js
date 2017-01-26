@@ -8,20 +8,7 @@
 
         clear : function(vga)
         {
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
-            vga.moveScreen();
+            vga.write('¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬');
         },
 
         write : function(vga,string)
