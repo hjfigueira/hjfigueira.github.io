@@ -16,7 +16,7 @@
     OperationSystem.prototype.printBootScreen = function()
     {
 
-        mb.withComponent(['vga','cpu'],function(vga,cpu){
+        this.motherBoard.withComponent(['vga','cpu'],function(vga,cpu){
 
             vga.write('¬');
             vga.write('¬');
