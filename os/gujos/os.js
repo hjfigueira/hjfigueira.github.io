@@ -58,7 +58,7 @@
 
     OperationSystem.prototype.loadLib = function(library, device)
     {
-        library.setDevice(device);
+        library.bindDevice(device);
         this.slots[device] = library;
     };
 
