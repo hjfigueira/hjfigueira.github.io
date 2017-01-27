@@ -15,5 +15,5 @@
         {
             vga.write(string);
         }
-    
+
     });

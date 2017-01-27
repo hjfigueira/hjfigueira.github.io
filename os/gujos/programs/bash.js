@@ -4,12 +4,12 @@
 
     bash = new Executable({
 
-        include : ['stdin','stdout'],
+        include : ['stdout'],
 
-        main : function(stdin, stdout){
+        main : function(stdout){
 
             stdout.call('clear');
-            stdout.write('>_');
+            stdout.call('write','>_');
 
         }
 

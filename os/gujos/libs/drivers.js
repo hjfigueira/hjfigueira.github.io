@@ -1,6 +1,7 @@
 
  function Driver(drivercode)
  {
+
    this.core = drivercode;
    this.device = null;
 
@@ -9,12 +10,11 @@
      this.device = device;
    };
 
-   this.call = function(method, arguments)
+   this.call = function(method)
    {
-       argumentList = [this.device];
-       argumentList.concat(arguments);
-
-       this.core[method].apply(this, argumentList);
+       var args = Array.prototype.slice.call(arguments);
+       args.push(this.device);
+       this.core[method].apply(this, args.reverse());
    }
 
  }

@@ -3,10 +3,7 @@
     {
         this.name = 'heliOS';
         this.motherBoard = motherBoard;
-        this.libs = {
-            'vga' : stdout,
-            'usb1' : stdin
-        };
+        this.libs = {};
     };
 
     OperationSystem.prototype.boot = function()
@@ -56,16 +53,16 @@
 
     };
 
-    OperationSystem.prototype.loadLib = function(library, device)
+    OperationSystem.prototype.loadLib = function(library, alias, device)
     {
-        library.bindDevice(device);
-        this.libs[device] = library;
+        library.bindDevice(this.motherBoard.slots[device]);
+        this.libs[alias] = library;
     };
 
     OperationSystem.prototype.bindDriversAndLibs = function()
     {
-        this.loadLib(stdout,'vga');
-        this.loadLib(stdin,'usb1');
+        this.loadLib(stdout,'stdout','vga');
+        //this.loadLib(stdin,'stdin','usb1');
     };
 
 
@@ -83,14 +80,21 @@
     {
         libsToLoad = this.getLibs(program.include);
         program.loadLibs(libsToLoad);
+        program.setOs(this);
         program.run();
     };
 
-    OperationSystem.prototype.getLibs = function(libArray)
+    OperationSystem.prototype.getLibs = function(requestedLibs)
     {
-        return libArray.filter(function(n) {
-            return this.libs.indexOf(n) != -1;
+        var availableLibs = this.libs;
+        var loaded = [];
+
+        requestedLibs.forEach(function(index, collection){
+            loaded.push(availableLibs[index])
         });
+
+        return loaded;
+
     };
 
     OperationSystem.prototype.withLib = function(libsArray,ifConnected)
