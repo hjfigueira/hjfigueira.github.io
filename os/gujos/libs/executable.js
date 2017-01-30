@@ -4,7 +4,7 @@
     {
         this.os = null;
 
-        this.main = program.main;
+        this.program = program;
 
         this.include = program.include;
 
@@ -23,6 +23,6 @@
 
         this.run = function()
         {
-            this.main.apply(null,this.loadedLibs);
+            this.program.main.apply(this.program,this.loadedLibs);
         }
     }

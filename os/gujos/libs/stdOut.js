@@ -1,19 +1,19 @@
     
     stdout = new Driver({
 
-        main : function(vga)
+        main : function(mb,vga)
         {
 
         },
 
-        clear : function(vga)
+        clear : function(mb, vga)
         {
-            vga.write('¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬');
+            vga.clear();
         },
 
-        write : function(vga,string)
+        write : function(mb, vga, string, x,y)
         {
-            vga.write(string);
+            vga.write(string, x, y);
         }
 
     });

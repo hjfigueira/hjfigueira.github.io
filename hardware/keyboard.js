@@ -3,8 +3,9 @@
 
         this.name = name;
 
-
-
+        this.bindEvent();
+        this.buffer = [];
+        this.callback = null;
     };
 
     KeyBoard.prototype.onPowerCheck = function()
@@ -30,4 +31,25 @@
     KeyBoard.prototype.onClock = function()
     {
 
+    };
+
+    KeyBoard.prototype.bindEvent = function()
+    {
+        var self = this;
+
+        document.onkeydown = function(event)
+        {
+            self.pushToBuffer(event.key);
+            self.callback.apply(this,[event.key]);
+        }
+    };
+
+    KeyBoard.prototype.pushToBuffer = function(keyPressed)
+    {
+        this.buffer.push(keyPressed);
+    };
+
+    KeyBoard.prototype.onPress = function(callback)
+    {
+        this.callback = callback;
     };

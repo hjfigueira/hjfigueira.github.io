@@ -38,16 +38,16 @@
             vga.write('--------------------------------------------------¬');
         });
 
-        this.hardwareSpecs();
+        //this.hardwareSpecs();
 
         this.startComponents();
 
         this.withComponent(['vga','cpu','sata'],function(vga,cpu,sata){
-            vga.write('¬');
-            vga.write('Starting BOOT Coroutine¬');
-            vga.write('--------------------------------------------------¬');
-            cpu.sleep(2000);
-            vga.clear();
+            //vga.write('¬');
+            //vga.write('Starting BOOT Coroutine¬');
+            //vga.write('--------------------------------------------------¬');
+            //cpu.sleep(2000);
+            //vga.clear();
             sata.boot();
         });
 

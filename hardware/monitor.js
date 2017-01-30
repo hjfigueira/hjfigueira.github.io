@@ -154,20 +154,6 @@
         }
     };
 
-    //Monitor.prototype.write = function(string, x, y)
-    //{
-    //    var self = this;
-    //
-    //    if(!x){x = this.xSize-1};
-    //    if(!y){y = 1};
-    //
-    //    if(typeof string != 'undefined')
-    //    {
-    //        self.queue.push({ x : x, y : y, string :string});
-    //        self.print();
-    //    }
-    //};
-
     Monitor.prototype.write = function(string, x, y)
     {
         var self = this;
