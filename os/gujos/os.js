@@ -19,32 +19,32 @@
 
         this.motherBoard.withComponent(['vga','cpu'],function(vga,cpu){
 
-            //vga.write('¬');
-            //vga.write('¬');
-            //vga.write('--------------------------------------------------¬');
-            //vga.write('             _          _ _  ___  ____  ¬');
-            //vga.write('            | |__   ___| (_)/ _ \\/ ___| ¬');
-            //vga.write('            |  _ \\ / _ \\ | | | | \\___ \\ ¬');
-            //vga.write('            | | | |  __/ | | |_| |___)|¬');
-            //vga.write('            |_| |_|\\___|_|_|\\___/|____/ ¬');
-            //vga.write('¬');
-            //vga.write('¬');
-            //vga.write('--------------------------------------------------¬');
-            //vga.write('       Hyper-Engineered Local-Installed OS ¬');
-            //vga.write('--------------------------------------------------¬');
-            //vga.write('¬');
-            //vga.write('¬');
-            //vga.write('¬');
-            //vga.write('¬');
-            //vga.write('                    Wellcome¬');
-            //vga.write('¬');
-            //vga.write('¬');
-            //vga.write('¬');
-            //vga.write('¬         Loading Things and Other Stuff¬');
-            //cpu.setFrequency(10);
-            //vga.write('          ##############################¬');
-            //cpu.restoreDefaultFrequency();
-            //vga.write('¬');
+            vga.write('¬');
+            vga.write('¬');
+            vga.write('--------------------------------------------------¬');
+            vga.write('             _          _ _  ___  ____  ¬');
+            vga.write('            | |__   ___| (_)/ _ \\/ ___| ¬');
+            vga.write('            |  _ \\ / _ \\ | | | | \\___ \\ ¬');
+            vga.write('            | | | |  __/ | | |_| |___)|¬');
+            vga.write('            |_| |_|\\___|_|_|\\___/|____/ ¬');
+            vga.write('¬');
+            vga.write('¬');
+            vga.write('--------------------------------------------------¬');
+            vga.write('       Hyper-Engineered Local-Installed OS ¬');
+            vga.write('--------------------------------------------------¬');
+            vga.write('¬');
+            vga.write('¬');
+            vga.write('¬');
+            vga.write('¬');
+            vga.write('                    Wellcome¬');
+            vga.write('¬');
+            vga.write('¬');
+            vga.write('¬');
+            vga.write('¬         Loading Things and Other Stuff¬');
+            cpu.setFrequency(10);
+            vga.write('          ##############################¬');
+            cpu.setFrequency(500);
+            vga.write('¬');
 
         });
 
