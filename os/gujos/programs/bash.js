@@ -81,10 +81,25 @@
             else if ( command == 'help' ) {
 
                 stdout.call('write',0,0,'Available Comands ¬¬');
+                stdout.call('write',0,0,'cv     - Display info about the developer¬');
                 stdout.call('write',0,0,'help   - Display this help¬');
                 stdout.call('write',0,0,'send   - Sends contacts messages for administrator¬');
                 stdout.call('write',0,0,'ls     - List folder content¬');
                 stdout.call('write',0,0,'cd     - Change current directory¬');
+
+            }
+            else if ( command == 'cv' ) {
+
+                stdout.call('write',0,0,'HÉLIO FIGUEIRA JUNIOR - PHP and Javascript Developer¬');
+                stdout.call('write',0,0,'heliofigueirajr@gmail.com - +55 41 997410124¬¬');
+                stdout.call('write',0,0,'5 years experienced developer, php and javascript but¬');
+                stdout.call('write',0,0,'also lightly versed in python and ruby, very lightly.¬');
+                stdout.call('write',0,0,'Full understanding of all current market techs like¬');
+                stdout.call('write',0,0,'php and js, like gulp, docker, angular, php7, DERs¬');
+                stdout.call('write',0,0,'unit testing, tdd and a lot of other tags¬');
+                stdout.call('write',0,0,'and all that i dont know, i lear, like everithing above¬');
+                stdout.call('write',0,0,'Also, October plugins, really love to make those¬¬');
+                stdout.call('write',0,0,'So, fell free to contact me. Cheers');
 
             }
             else{
